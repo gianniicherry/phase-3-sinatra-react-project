@@ -1,3 +1,3 @@
 class Show < ActiveRecord::Base
-    belongs_to :bands
+    belongs_to :band
 end

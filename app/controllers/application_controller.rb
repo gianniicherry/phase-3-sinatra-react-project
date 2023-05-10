@@ -7,13 +7,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/bands" do
-    bands = Band.create(
+    band = Band.create(
       name: params[:name],
       description: params[:description],
       genre: params[:genre]
     )
 
-    bands.to_json(include: :shows)
+    band.to_json(include: :shows)
   end
 
   delete "/bands/:id" do 
@@ -33,6 +33,16 @@ class ApplicationController < Sinatra::Base
     shows = Show.all
 
     shows.to_json
+  end
+
+  patch "/bands/:id" do
+    band = Band.find(params[:id])
+
+    band.update(
+      description: params[:description]
+    )
+
+    band.to_json(include: :shows)
   end
 
   post "/bands/:id/shows" do
